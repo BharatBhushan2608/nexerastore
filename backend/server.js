@@ -41,6 +41,10 @@ app.use('/api/v1/orders' ,  orderRoute)
 
 // http://localhost:8000/api/v1/user/register
 
+app.get("/", (req, res) => {
+  res.send("NexEraStore Backend Running Successfully 🚀");
+});
+
 
 app.listen(PORT, () => {
     connectDB();
