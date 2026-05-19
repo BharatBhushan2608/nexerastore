@@ -27,10 +27,17 @@ const PORT = process.env.PORT || 3000;
 
 // middeleware
 app.use(express.json());
+
 app.use(cors({
-    origin: true, // Allow all origins for development  meeeeee change it 
-    credentials: true, // Allow cookies to be sent with requests
-})) ;
+  origin: "https://nexerastore.vercel.app",
+  credentials: true
+}))
+
+
+// app.use(cors({
+//     origin: true, // Allow all origins for development  meeeeee change it 
+//     credentials: true, // Allow cookies to be sent with requests
+// })) ;
 
 // api creation
 app.use('/api/v1/user' , userRoute)
