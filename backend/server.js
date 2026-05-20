@@ -32,10 +32,12 @@ app.use(express.json());
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://nexerastore.vercel.app"
+    "https://nexerastore.vercel.app",
+    "https://nexerastore-git-main-bharatbhushan2608s-projects.vercel.app",
+    "https://nexerastore-mxkwvyf60-bharatbhushan2608s-projects.vercel.app"
   ],
   credentials: true
-}))
+}));
 
 // app.use(cors({
 //   origin: "https://nexerastore.vercel.app",
