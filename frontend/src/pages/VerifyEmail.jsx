@@ -12,7 +12,7 @@ const VerifyEmail = () => {
     const verifyEmail = async () => {
         try {
             // Make API call to verify email using the token
-            const res = await axios.post(`http://localhost:8000/api/v1/user/verify`,{},{ 
+            const res = await axios.post(`${import.meta.env.VITE_URL}/api/v1/user/verify`,{},{ 
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -35,7 +35,7 @@ const VerifyEmail = () => {
     }, [token]);
 
   return (
-    <div className='relative w-full h-[690px] bg-pink-100 overflow-hidden'>
+    <div className='relative w-full h-172.5 bg-pink-100 overflow-hidden'>
         <div className='min-h-screen flex items-center justify-center px-4'>
             <div className='bg-white p-6 rounded-2xl shadow-md text-center w-[90%] max-w-md'>
                 <h2 className='text-xl font-semibold text-gray-800'>{status}</h2>

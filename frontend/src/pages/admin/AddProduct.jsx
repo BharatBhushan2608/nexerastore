@@ -51,7 +51,7 @@ const AddProduct = () => {
         });
         try {
             setLoading(true);
-            const res = await axios.post(`http://localhost:8000/api/v1/product/add`, formData, {
+            const res = await axios.post(`${import.meta.env.VITE_URL}/api/v1/product/add`, formData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -72,7 +72,7 @@ const AddProduct = () => {
     
 
     return (
-        <div className='pl-[350px] py-10 pr-20 mx-auto px-4 bg-gray-100'>
+        <div className='pl-87.5 py-10 pr-20 mx-auto px-4 bg-gray-100'>
 
             <Card className='w-full my-20'>
                 <CardHeader>

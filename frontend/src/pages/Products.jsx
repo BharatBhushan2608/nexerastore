@@ -34,7 +34,7 @@ const Products = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(`http://localhost:8000/api/v1/product/getallproduct`)
+      const res = await axios.get(`${import.meta.env.VITE_URL}/api/v1/product/getallproduct`)
       if (res.data.success) {
         setAllProducts(res.data.products)
         dispatch(setProducts(res.data.products))

@@ -25,7 +25,7 @@ const Cart = () => {
 
     const navigate = useNavigate();
 
-    const API = "http://localhost:8000/api/v1/cart"
+    const API = `${import.meta.env.VITE_URL}/api/v1/cart`
     const accessToken = localStorage.getItem('accessToken');
 
     const handelUpdateQuantity = async (productId, type) => {
