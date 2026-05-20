@@ -37,7 +37,7 @@ export const registerUser = async (req, res) => {
 
         // Generate a JWT token for send email verification. This token will be sent to the user's email and will be used to verify their email address when they click the verification link.
         const token = jwt.sign({id:newUser._id}, process.env.SECRET_KEY , {expiresIn: "10m"});
-        verifyEmail(token , email); // Send verification email.
+         await verifyEmail(token , email); // Send verification email.
         newUser.token = token; // Store the token in the database for later verification.
 
         await newUser.save();
