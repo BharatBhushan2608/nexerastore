@@ -34,7 +34,8 @@ app.use(cors({
     "http://localhost:5173",
     "https://nexerastore.vercel.app",
     "https://nexerastore-git-main-bharatbhushan2608s-projects.vercel.app",
-    "https://nexerastore-mxkwvyf60-bharatbhushan2608s-projects.vercel.app"
+    "https://nexerastore-mxkwvyf60-bharatbhushan2608s-projects.vercel.app",
+    "https://nexerastore-4tbenjrtq-bharatbhushan2608s-projects.vercel.app"
   ],
   credentials: true
 }));
