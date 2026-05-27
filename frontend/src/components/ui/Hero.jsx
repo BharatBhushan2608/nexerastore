@@ -9,8 +9,8 @@ export const Hero = () => {
             <div className='max-w-7xl mx-auto px-4'>
                 <div className='grid md:grid-cols-2 gap-8 items-center'>
                     <div >
-                        <h1 className='text-4xl md:text-6xl font-bold mb-4'>Latest Electronics at Best Prices</h1>
-                        <p className='text-xl mb-6 text-blue-100'>Discover cutting-edge technology with unbeatable  deals on smartphones, laptops, and more!</p>
+                        <h1 className='text-4xl md:text-6xl font-bold mb-4'>Explore Trending Products Across Every Category</h1>
+                        <p className='text-xl mb-6 text-blue-100'>Explore trending gadgets, lifestyle essentials, skincare products, electronics, and more at unbeatable prices!</p>
                         <div className='flex flex-col sm:flex-row gap-4'>
                             <Button variant='outline'
                                 onClick={() => navigate("/products")}
