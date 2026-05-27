@@ -13,13 +13,13 @@ const Footer = () => {
             <img src="/online-shopping.png" alt="logo" className="w-15" />
           </Link>
           <p className="mt-2 text-sm">
-            Powering Your World with the Best in Electronics.
+            Your One-Stop Destination for Smart Shopping.
           </p>
           <p className="mt-2 text-sm">
-            123 Electronics St, Style City, NY 10001
+            Near Maharaja Sweets and v2 mall, samastipur, Bihar, India - 848101
           </p>
-          <p className="text-sm">Email: support@zaptro.com</p>
-          <p className="text-sm">Phone: (123) 456-7890</p>
+          <p className="text-sm">Email: bharatbhushan2608@gmail.com</p>
+          <p className="text-sm">Phone: (+91) 9123495831</p>
         </div>
 
         {/* customer service links */}
@@ -72,7 +72,7 @@ const Footer = () => {
       <div className="mt-8 border-t border-gray-700 pt-6 text-center text-sm">
         <p>
           &copy; {new Date().getFullYear()}{" "}
-          <span className="text-pink-600">EKart</span>. All rights reserved.
+          <span className="text-pink-600">Nexerastore</span>. All rights reserved.
         </p>
       </div>
     </footer>
