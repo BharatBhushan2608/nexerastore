@@ -7,9 +7,9 @@ import { Product } from "../models/productModel.js";
 
 export const createOrder = async (req, res) => {
     try {
-        console.log("BODY:", req.body)
-        console.log("USER:", req.user)
-        console.log("KEY:", process.env.RAZORPAY_KEY_ID)
+        // console.log("BODY:", req.body)
+        // console.log("USER:", req.user)
+        // console.log("KEY:", process.env.RAZORPAY_KEY_ID)
 
         const { products, amount, tax, shipping, currency } = req.body;
         const options = {
