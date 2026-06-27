@@ -7,9 +7,9 @@
 // dns.setServers(["8.8.8.8", "8.8.4.4"]);
 // dns.setDefaultResultOrder("ipv4first");
 
-// import dns from "dns";
-// // Ensure Node uses reliable public DNS for SRV lookups (workaround for local DNS stub issues)
-// dns.setServers(["8.8.8.8", "8.8.4.4"]);
+import dns from "dns";
+// Ensure Node uses reliable public DNS for SRV lookups (workaround for local DNS stub issues)
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 import express from 'express';
 import 'dotenv/config';
