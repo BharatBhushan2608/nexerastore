@@ -90,32 +90,32 @@ const Cart = () => {
     }, [dispatch]);
 
     return (
-        <div className="pt-20 bg-gray-50 min-h-screen">
+        <div className="w-full min-h-screen bg-gray-50 pt-20">
             {cart?.items?.length > 0 ? (
-                <div className="max-w-7xl mx-auto">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h1 className="text-2xl font-bold text-gray-800 mb-7">
                         Shopping Cart
                     </h1>
 
-                    <div className="max-w-7xl mx-auto flex gap-7">
+                    <div className="flex flex-col lg:flex-row gap-7">
                         {/* LEFT SIDE */}
-                        <div className="flex flex-col gap-5 flex-1">
+                        <div className="flex flex-col gap-5 flex-1 w-full">
                             {cart?.items?.map((product, index) => {
                                 return (
-                                    <Card key={index}>
-                                        <div className="flex justify-between items-center pr-7">
+                                    <Card key={index} className="w-full">
+                                        <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-6 p-4">
                                             {/* PRODUCT INFO */}
-                                            <div className="flex items-center w-87.5">
+                                            <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-[360px]">
                                                 <img
                                                     src={
                                                         product?.productId?.productImg?.[0]?.url ||
                                                         userlogo
                                                     }
                                                     alt=""
-                                                    className="w-25 h-25 object-cover"
+                                                    className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg"
                                                 />
 
-                                                <div className="w-70">
+                                                <div className="w-full text-center sm:text-left">
                                                     <h1 className="font-semibold truncate">
                                                         {product?.productId?.productName}
                                                     </h1>
@@ -126,21 +126,21 @@ const Cart = () => {
                                             </div>
 
                                             {/* QUANTITY */}
-                                            <div className="flex gap-5 items-center">
+                                            <div className="flex justify-center items-center gap-4 w-full lg:w-auto">
                                                 <Button onClick={() => handelUpdateQuantity(product?.productId?._id, 'decrease')} variant="outline">-</Button>
                                                 <span>{product?.quantity}</span>
                                                 <Button onClick={() => handelUpdateQuantity(product?.productId?._id, 'increase')} variant="outline">+</Button>
                                             </div>
 
                                             {/* PRICE + REMOVE */}
-                                            <div>
+                                            <div className="text-center lg:text-right">
                                                 <p>
                                                     ₹
                                                     {product?.productId?.productPrice *
                                                         product?.quantity}
                                                 </p>
 
-                                                <p className="flex text-red-500 items-center gap-1 cursor-pointer" onClick={() => handelRemove(product?.productId?._id)}>
+                                                <p className="flex justify-center lg:justify-end text-red-500 items-center gap-1 cursor-pointer mt-2" onClick={() => handelRemove(product?.productId?._id)}>
                                                     <Trash2 className="w-4 h-4" />
                                                     Remove
                                                 </p>
@@ -152,14 +152,14 @@ const Cart = () => {
                         </div>
 
                         {/* RIGHT SIDE (SUMMARY) */}
-                        <div>
-                            <Card className="w-100">
+                        <div className="w-full lg:w-[420px]">
+                            <Card className="w-full lg:w-[420px] lg:sticky lg:top-24">
                                 <CardHeader>
                                     <CardTitle>Order Summary</CardTitle>
                                 </CardHeader>
 
                                 <CardContent className="space-y-4">
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between items-center text-sm sm:text-base">
                                         <span>
                                             Subtotal ({cart?.items?.length} items)
                                         </span>
@@ -180,35 +180,40 @@ const Cart = () => {
 
                                     <Separator />
 
-                                    <div className="flex justify-between font-bold text-lg">
+                                    <div className="flex justify-between items-center font-bold text-lg sm:text-xl">
                                         <span>Total</span>
                                         <span>₹{total}</span>
                                     </div>
 
                                     {/* PROMO */}
                                     <div className="space-y-3 pt-4">
-                                        <div className="flex gap-2">
+                                        <div className="flex flex-col sm:flex-row gap-2">
                                             <Input placeholder="Promo Code" />
-                                            <Button variant="outline">Apply</Button>
+                                            <Button 
+                                                variant="outline"
+                                                className="w-full sm:w-auto"
+                                            >
+                                                Apply
+                                            </Button>
                                         </div>
 
-                                        <Button 
-                                        onClick={()=>navigate('/address')}
-                                        className="w-full bg-pink-600"
+                                        <Button
+                                            onClick={() => navigate('/address')}
+                                            className="w-full py-6 bg-pink-600 hover:bg-pink-700"
                                         >
                                             PLACE ORDER
                                         </Button>
 
                                         <Button
                                             variant="outline"
-                                            className="w-full bg-transparent"
+                                            className="w-full py-6  "
                                         >
                                             <Link to="/products">Continue Shopping</Link>
                                         </Button>
                                     </div>
 
                                     {/* INFO */}
-                                    <div className="text-sm text-muted-foreground pt-4">
+                                    <div className="text-xs sm:text-sm text-muted-foreground pt-4 space-y-1">
                                         <p>• Free shipping on orders over ₹299</p>
                                         <p>• 30-days return policy</p>
                                         <p>• Secure checkout with SSL encryption</p>

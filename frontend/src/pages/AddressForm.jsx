@@ -102,7 +102,7 @@ const AddressForm = () => {
                 },
               }
             );
-                // // both are same  suggested code 
+            // // both are same  suggested code 
             // const verifyRes = await axios.post(
             //   `${import.meta.env.VITE_URL}/api/v1/orders/verify-payment`,
             //   {
@@ -134,7 +134,7 @@ const AddressForm = () => {
             }
 
           } catch (error) {
-            console.log("Checking verify: " , error)
+            console.log("Checking verify: ", error)
             toast.error("Error verifying payment");
           }
         },
@@ -191,11 +191,12 @@ const AddressForm = () => {
 
 
   return (
-    <div className='max-w-7xl mx-auto grid place-items-center p-10'>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-      <div className='grid grid-cols-2 items-start gap-20 mt-10 max-w-7xl mx-auto'>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mt-6">
 
-        <div className='space-y-4 p-6 bg-white'>
+        {/* Left Section */}
+        <div className="space-y-4 p-4 sm:p-6 bg-white rounded-lg shadow-sm w-full">
 
           {
             showForm ? (
@@ -336,15 +337,16 @@ const AddressForm = () => {
 
               </>
             ) : (
-              <div className='space-y-4'>
+              <div className="space-y-4 w-full">
                 <h2 className='text-lg font-semibold'>Saved Addresses</h2>
 
                 {
                   addresses.map((addr, index) => {
                     return (
-                      <div key={index}
+                      <div
+                        key={index}
                         onClick={() => dispatch(setSelectedAddress(index))}
-                        className={`border p-4 rounded-md cursor-pointer relative ${selectedAddress === index
+                        className={`border p-4 rounded-lg cursor-pointer relative transition-all duration-200 ${selectedAddress === index
                           ? "border-pink-600 bg-pink-50"
                           : "border-gray-300"
                           }`}
@@ -352,13 +354,13 @@ const AddressForm = () => {
                         <p className='font-medium'>{addr.fullName}</p>
                         <p>{addr.phone}</p>
                         <p>{addr.email}</p>
-                        <p>
+                        <p className="text-sm text-gray-600 break-words">
                           {addr.address}, {addr.city}, {addr.state}, {addr.zip}, {addr.country}
                         </p>
 
                         <button
                           onClick={(e) => dispatch(deleteAddress(index))}
-                          className='absolute top-2 right-2 text-red-500 hover:text-red-700 text-sm'
+                          className="absolute top-3 right-3 text-red-500 hover:text-red-700 text-xs sm:text-sm"
                         >
                           Delete
                         </button>
@@ -367,12 +369,14 @@ const AddressForm = () => {
                   })
                 }
                 <Button
-                  variant='outline' className='w-full'
+                  variant='outline'
+                  className="w-full py-5"
                   onClick={() => setShowForm(true)}
                 >
                   + Add New Address
                 </Button>
-                <Button className='w-full bg-pink-600'
+                <Button
+                  className="w-full py-5 bg-pink-600 hover:bg-pink-700"
                   disabled={selectedAddress === null}
                   onClick={handlePayment}
                 >
@@ -384,44 +388,64 @@ const AddressForm = () => {
 
         </div>
 
-        {/* Right side Order Summary */}
-        <div>
-          <Card className="w-100">
+        {/* Right Side Order Summary */}
+        <div className="w-full">
+          <Card className="w-full lg:max-w-md lg:sticky lg:top-24 shadow-md">
+
             <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
+              <CardTitle className="text-xl">
+                Order Summary
+              </CardTitle>
             </CardHeader>
 
             <CardContent className="space-y-4">
-              <div className="flex justify-between">
-                <span>Subtotal ({cart.items.length}) items</span>
-                <span>₹{subtotal.toLocaleString("en-IN")}</span>
+
+              <div className="flex justify-between items-center text-sm sm:text-base">
+                <span>
+                  Subtotal ({cart.items.length}) items
+                </span>
+
+                <span>
+                  ₹{subtotal.toLocaleString("en-IN")}
+                </span>
               </div>
-              <div className="flex justify-between">
-                <span> Shipping </span>
+
+              <div className="flex justify-between items-center text-sm sm:text-base">
+                <span>Shipping</span>
                 <span>₹{shipping}</span>
               </div>
-              <div className="flex justify-between">
-                <span> Tax </span>
+
+              <div className="flex justify-between items-center text-sm sm:text-base">
+                <span>Tax</span>
                 <span>₹{tax}</span>
               </div>
+
               <Separator />
-              <div className="flex justify-between font-bold text-lg">
-                <span> Total  </span>
+
+              <div className="flex justify-between items-center font-bold text-lg sm:text-xl">
+                <span>Total</span>
                 <span>₹{total}</span>
               </div>
-              <div className='text-sm text-muted-foreground pt-4'>
+
+              <div className="text-xs sm:text-sm text-muted-foreground pt-4 space-y-2">
                 <p>• Free shipping on orders over ₹299</p>
                 <p>• 30-days return policy</p>
                 <p>• Secure checkout with SSL encryption</p>
               </div>
+
             </CardContent>
+
           </Card>
         </div>
 
       </div>
 
     </div>
+
+
   )
 }
+
+
 
 export default AddressForm

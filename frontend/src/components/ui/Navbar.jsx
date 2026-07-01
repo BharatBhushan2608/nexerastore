@@ -124,9 +124,9 @@ const logoutHandler = async () => {
 };
 
 return (
-    <header className='bg-pink-100 fixed w-full z-50 border-b border-pink-200 shadow-sm'>
+    <header className="fixed top-0 left-0 w-full h-16 bg-pink-100 border-b border-pink-200 shadow-sm z-50">
 
-        <div className='max-w-7xl mx-auto flex justify-between items-center py-3 px-4'>
+        <div className="max-w-7xl mx-auto h-full flex justify-between items-center px-4">
 
             {/* Logo */}
             <Link to="/">
@@ -205,7 +205,7 @@ return (
             </nav>
 
             {/* Mobile Menu Button */}
-            <button
+            <Button
                 className='md:hidden'
                 onClick={() => setIsOpen(!isOpen)}
             >
@@ -214,7 +214,7 @@ return (
                         ? <X size={28} />
                         : <Menu size={28} />
                 }
-            </button>
+            </Button>
 
         </div>
 

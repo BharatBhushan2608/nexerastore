@@ -88,10 +88,10 @@ const UserInfo = () => {
   }
 
   return (
-    <div className="pt-5 min-h-screen bg-gray-100">
+    <div className="pt-20 min-h-screen bg-gray-100 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
-          <div className="flex justify-between gap-10">
+          <div className="flex items-center gap-4 w-full max-w-4xl mb-6">
 
             <Button onClick={() => navigate(-1)}>
               <ArrowLeft />
@@ -101,17 +101,17 @@ const UserInfo = () => {
               Update Profile
             </h1>
           </div>
-          <div className="w-full flex gap-10 justify-between items-start px-7 max-w-2xl">
+          <div className="w-full max-w-4xl flex flex-col md:flex-row gap-8 items-center md:items-start px-2 sm:px-4">
 
             {/* Profile Image */}
-            <div className="flex  flex-col items-center">
+            <div className="flex flex-col items-center w-full md:w-1/3">
               <img
                 src={updateUser?.profilePic || userlogo}
                 alt="profile"
-                className="w-40 h-30 rounded-full object-cover border-4 border-pink-800"
+                className="w-40 h-40 rounded-full object-cover border-4 border-pink-800"
               />
 
-              <Label className="mt-4 cursor-pointer bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700 h-10 w-20 ">
+              <Label className="mt-4 cursor-pointer bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700 text-center w-40">
                 Change Profile
                 <input type="file" accept="image/*" className="hidden"
                   onChange={handelFileChange}
@@ -120,9 +120,9 @@ const UserInfo = () => {
             </div>
 
             {/* Profile Form */}
-            <form onSubmit={handelSubmit} className="space-y-4 shadow-lg p-5 rounded-lg bg-white w-full">
+            <form onSubmit={handelSubmit} className="space-y-4 shadow-lg p-5 sm:p-6 rounded-lg bg-white w-full md:w-2/3">
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <div>
                   <Label>First Name</Label>
@@ -187,7 +187,7 @@ const UserInfo = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <Label>City</Label>
                   <Input
@@ -213,20 +213,20 @@ const UserInfo = () => {
                 </div>
               </div>
 
-              <div className='flex gap-3 items-center'>
+              <div className='flex flex-col sm:flex-row gap-3 sm:items-center'>
                 <Label className="block text-sm font-medium">Role :</Label>
-                <RadioGroup 
-                value={updateUser?.role}
-                onValueChange={(value)=>setUpdateUser({...updateUser, role:value})} 
-                className='flex items-center'>
-                <div className='flex items-center space-x-2'>
-                  <RadioGroupItem value="user" id="user"/>
-                  <Label htmlFor="user">User</Label>
-                </div>
-                <div className='flex items-center space-x-2'>
-                  <RadioGroupItem value=" admin" id="admin"/>
-                  <Label htmlFor="admin">Admin</Label>
-                </div>
+                <RadioGroup
+                  value={updateUser?.role}
+                  onValueChange={(value) => setUpdateUser({ ...updateUser, role: value })}
+                  className='flex flex-wrap items-center gap-4'>
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value="user" id="user" />
+                    <Label htmlFor="user">User</Label>
+                  </div>
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value=" admin" id="admin" />
+                    <Label htmlFor="admin">Admin</Label>
+                  </div>
                 </RadioGroup>
               </div>
 
