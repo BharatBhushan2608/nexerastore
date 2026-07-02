@@ -54,6 +54,14 @@ const AddressForm = () => {
   const handlePayment = async () => {
     const accessToken = localStorage.getItem("accessToken");
 
+    // ✅ Validate Razorpay Key
+    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
+    if (!razorpayKey || razorpayKey === "" || razorpayKey.includes("your_razorpay")) {
+      toast.error("❌ Razorpay key not configured. Please check your .env.local file");
+      console.error("❌ VITE_RAZORPAY_KEY_ID is not properly configured");
+      return;
+    }
+
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_URL}/api/v1/orders/create-order`,
@@ -81,9 +89,10 @@ const AddressForm = () => {
       }
 
       console.log("Razorpay data:", data);
+      console.log("✅ Using Razorpay Key:", razorpayKey.substring(0, 10) + "...");
 
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        key: razorpayKey,
         amount: data.order.amount,
         currency: data.order.currency,
         order_id: data.order.id, // Order ID from backend

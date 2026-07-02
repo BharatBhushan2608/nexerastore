@@ -7,18 +7,41 @@ import { Product } from "../models/productModel.js";
 
 export const createOrder = async (req, res) => {
     try {
-        // console.log("BODY:", req.body)
-        // console.log("USER:", req.user)
-        // console.log("KEY:", process.env.RAZORPAY_KEY_ID)
+        // ✅ Validate Razorpay Configuration
+        if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_SECRET) {
+            console.error("❌ Razorpay keys not configured in environment variables");
+            return res.status(500).json({
+                success: false,
+                message: "Payment gateway not configured. Please contact support.",
+                details: "Missing RAZORPAY_KEY_ID or RAZORPAY_SECRET"
+            });
+        }
+
+        console.log("📨 REQUEST BODY:", req.body)
+        console.log("👤 USER:", req.user?.email)
+        console.log("🔑 RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID?.substring(0, 10) + "...")
 
         const { products, amount, tax, shipping, currency } = req.body;
+        
+        // Validate required fields
+        if (!products || !amount) {
+            console.error("❌ Missing required fields: products or amount");
+            return res.status(400).json({
+                success: false,
+                message: "Missing required fields: products and amount"
+            });
+        }
+
         const options = {
             amount: Math.round(Number(amount) * 100), // convert to paise
             currency: currency || "INR",
             receipt: `receipt_${Date.now()}`
         }
 
+        console.log("📦 Creating Razorpay order with options:", options);
+        console.log("📦 Amount in paise:", options.amount);
         const razorpayOrder = await razorpayInstance.orders.create(options)
+        console.log("✅ Razorpay order created:", razorpayOrder.id);
 
         //save order in DB
         const newOrder = new Order({
@@ -42,12 +65,35 @@ export const createOrder = async (req, res) => {
 
 
     } catch (error) {
-        console.log("❌ Error in create Order: ", error)
+        console.error("❌❌❌ ERROR IN CREATE ORDER ❌❌❌");
+        console.error("Error Message:", error.message);
+        console.error("Error Stack:", error.stack);
+        console.error("Full Error:", error);
+        
+        // ✅ Better error messages for common issues
+        let errorMessage = error.message || error.error?.description || "Unknown error";
+        
+        // Check for Razorpay authentication error
+        if (error.statusCode === 401 || error.error?.code === "BAD_REQUEST_ERROR") {
+            errorMessage = "❌ Razorpay authentication failed. Your API keys are invalid or don't match.";
+        } else if (errorMessage && errorMessage.includes("Invalid API key")) {
+            errorMessage = "Invalid Razorpay API key. Please check your credentials.";
+        } else if (errorMessage && errorMessage.includes("Unauthorized")) {
+            errorMessage = "Razorpay authentication failed. Invalid credentials.";
+        } else if (errorMessage && errorMessage.includes("ECONNREFUSED")) {
+            errorMessage = "Cannot connect to Razorpay. Check your internet connection.";
+        } else if (errorMessage && errorMessage.includes("Cast to ObjectId failed")) {
+            errorMessage = "Invalid user ID. Please login again.";
+        } else if (errorMessage && errorMessage.includes("ValidationError")) {
+            errorMessage = "Invalid order data. Please check your cart items.";
+        }
+        
         res
             .status(500)
             .json({
                 success: false,
-                message: error.message
+                message: errorMessage,
+                error: error.message
             })
     }
 }
